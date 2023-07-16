@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="seven columns">
+      <h1>Vouchers</h1>
+    </div>
+  </div>
+
+  <% if @voucher %>
+    <div class="row">
+      <%= form_with url: voucher_code_path, method: :patch do |f| %>
+        <div class="four columns" style="margin-left: 0">
+          <%= f.text_field :code, class: "u-full-width", disabled: true, placeholder: @voucher.code %>
+        </div>
+        <div class="four columns">
+          <%= f.hidden_field :claimed_at, value: Date.today %>
+          <%= f.submit 'Use Code' %>
+        </div>
+      <% end %>
+      <div class="four columns">
+        <%= link_to 'Try a Different One', voucher_codes_path, class: 'button' %>
+      </div>
+    </div>
+  <% else %>
+    <div class="row">
+      <%= form_with url: validate_voucher_codes_path do |f| %>
+        <div class="eight columns" style="margin-left: 0">
+          <%= f.text_field :code, class: "u-full-width" %>
+        </div>
+        <div class="four columns">
+          <%= f.submit 'Validate Code', class: 'u-full-width' %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <%= form_with url: voucher_codes_path, method: :post do |f| %>
+      <div class="four columns" style="margin-left: 0; margin-bottom: 18px">
+        <%= f.number_field :number_of_codes, value: 1, class: 'u-full-width input' %>
+      </div>
+      <div class="four columns">
+        <%= f.date_field :valid_until, class: 'u-full-width input' %>
+      </div>
+      <div class="four columns">
+        <%= f.submit 'Create', class: 'u-full-width' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="four columns u-pull-right">
+      <%= link_to 'Show All Valid', voucher_codes_path(:show_valid => true), class: "button u-full-width" %>
+    </div>
+  </div>
+
+  <% if @vouchers %>
+    <table class="u-full-width">
+      <thead>
+      <tr>
+        <th>Code</th>
+        <th>Valid until</th>
+        <th>Claim</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @vouchers.each do |voucher_code| %>
+        <tr>
+          <td><%= voucher_code.code %></td>
+          <td><%= voucher_code.valid_until %></td>
+          <td><%= button_to 'Claim', voucher_code_path(voucher_code), method: :patch %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

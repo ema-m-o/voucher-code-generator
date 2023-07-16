@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+
+  <body style="margin: unset">
+    <div class="container u-max-full-width" style="width: 100%; margin-bottom: 30px">
+      <div class="row">
+        <div class="twelve columns" style='background-color: #000'>
+          <h3 style="margin: 15px">
+            <a href="/" style="color: #fff; text-decoration: none">Home</a>
+          </h3>
+        </div>
+      </div>
+      <% if flash.any? %>
+        <% flash.each do |_type, msg| %>
+          <div>
+            <%= msg %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%= yield %>
+  </body>
+</html>

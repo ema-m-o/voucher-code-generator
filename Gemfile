@@ -28,6 +28,8 @@ gem 'skeleton-rails', '~> 1.2'
 
 gem 'rubocop-rails', require: false
 
+gem 'devise'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -41,8 +43,8 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   gem 'rspec-rails', '~> 6.0.0'
+  gem 'spring'
 end
 
 group :test do
@@ -50,8 +52,8 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
   gem 'rspec-rails', '~> 6.0.0'
+  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
